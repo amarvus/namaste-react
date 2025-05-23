@@ -1,41 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-
-
-const Header = () => {
-    return(
-        <div className="header">
-            <div>
-                <img className="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGDuOrpGlhOAHpypz9I7ZaUTSZyKxK8-YQRg&s" alt="logo"/>
-            </div>
-            <div className="nav-items">
-                <ul>
-                    <li>Home</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
-                    <li>Cart</li>
-                </ul>
-            </div>
-        </div>
-    )
-}
-
-const RestaurantCard = (props) => {
-  const {resData} = props;
-
-  const {name, cuisines, avgRating, deliveryTime} = resData?.data;
-    return(
-        <div className="res-card">
-            <img className="res-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSXZxM9oJMgCXnxPeMhjA_sSlUDyEF7IQw-Q&s" alt="res-logo"/>
-            <h3>{name}</h3>
-            <h4>{cuisines.join(", ")}</h4>
-            <h4>{avgRating}⭐</h4>
-            <h4>{deliveryTime} minutes</h4>
-        </div>
-    )
-}
-
 const resList = [
     {
     type: "restaurant",
@@ -1921,40 +1883,4 @@ const resList = [
   },
 ];
 
-const Body = () => {
-    return(
-        <div className="body">
-            <div className="search-bar">Search Bar</div>
-            <div className="res-container">
-                {/* <ResturantCard resData = {resList[0]}/>
-                <ResturantCard resData = {resList[1]}/>
-                <ResturantCard resData = {resList[2]}/>
-                <ResturantCard resData = {resList[3]}/>
-                <ResturantCard resData = {resList[4]}/>
-                <ResturantCard resData = {resList[5]}/>
-                <ResturantCard resData = {resList[6]}/>
-                <ResturantCard resData = {resList[7]}/>
-                <ResturantCard resData = {resList[8]}/>
-                <ResturantCard resData = {resList[9]}/>
-                <ResturantCard resData = {resList[10]}/>
-                <ResturantCard resData = {resList[11]}/> */}
-
-                {/* Whenever we loop over an array, we have to give unique key to every child */}
-                {resList.map ((restaurant) => <RestaurantCard key={restaurant.data.id} resData = {restaurant}/>)} 
-                
-            </div>
-        </div>
-    )
-}
-
-const AppLayout = () => {
-    return(
-        <div className="app">
-        <Header/>
-        <Body/>
-        </div>
-    )
-}
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout/>)
+export default resList;
