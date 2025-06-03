@@ -28,6 +28,10 @@ class UserClass extends React.Component {
 
     componentDidUpdate(){
         console.log("componentDidUpdate");
+    }
+
+    componentWillUnmount(){
+        console.log("componentWillUnmount");
         
     }
 
