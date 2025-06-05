@@ -1,12 +1,12 @@
 import RestaurantCard from "./RestaurantCard";
-import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
+import useOnlineStatus from "../utils/useOnlineStatus";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router";
 
 const Body = () => {
 
-    const [listofRestaurants, setlistofRestaurants] = useState("");
+    const [listofRestaurants, setlistofRestaurants] = useState(null);
 
     const [searchText, setsearchText] = useState("");
 
@@ -24,16 +24,26 @@ const Body = () => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.5476717&lng=87.2931383&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
     
         const json = await data.json();
+        
     
-        setlistofRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setlistofRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 
-        setfilteredRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setfilteredRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        
         
     };
 
-    if(listofRestaurants.length == 0){
+
+    const onlineStatus = useOnlineStatus();
+    if (onlineStatus == false) {
+        return <p>Looks like your internet connection is disconnected.</p>
+    }
+
+    if(listofRestaurants == null){
         return <Shimmer/>;
     }
+
+    
 
     return(
         <div className="body">
