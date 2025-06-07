@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { Link } from "react-router";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
 
@@ -9,20 +10,25 @@ const Header = () => {
 
     const onlineStatus = useOnlineStatus();
 
+    const {loggedInUser} = useContext(UserContext);
+    //console.log(loggedInUser);
+    
+
     return(
-        <div className="header">
+        <div className="flex h-30 justify-between bg-yellow-50 shadow-lg">
             <div>
-                <Link to="/"><img className="logo" src={LOGO_URL} alt="logo"/> </Link>
+                <Link to="/"><img className="w-30" src={LOGO_URL} alt="logo"/> </Link>
             </div>
-            <div className="nav-items">
-                <ul>
-                    <li>Online Status: {onlineStatus ? "🟢" : "🔴"}</li>
-                    <li><Link to = "/">Home</Link></li>
-                    <li><Link to = "/about">About</Link></li>
-                    <li><Link to = "/contact">Contact</Link></li>
-                    <li><Link to = "/grocery">Grocery</Link></li>
-                    <li>Cart</li>
-                    <button className="login-btn" onClick = {() => {btnName == "Login" ? setbtnName("Logout") : setbtnName("Login");}}>{btnName}</button>
+            <div className="flex items-center">
+                <ul className="flex p-4 m-4">
+                    <li className="p-4">Online Status: {onlineStatus ? "🟢" : "🔴"}</li>
+                    <li className="p-4"><Link to = "/">Home</Link></li>
+                    <li className="p-4"><Link to = "/about">About</Link></li>
+                    <li className="p-4"><Link to = "/contact">Contact Us</Link></li>
+                    <li className="p-4"><Link to = "/grocery">Grocery</Link></li>
+                    <li className="p-4">Cart</li>
+                    <button className="login-btn cursor-pointer" onClick = {() => {btnName == "Login" ? setbtnName("Logout") : setbtnName("Login");}}>{btnName}</button>
+                    {/* <li className="p-4 font-bold"> {loggedInUser} </li> */}
                 </ul>
             </div>
         </div>

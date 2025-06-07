@@ -13,7 +13,7 @@ const Body = () => {
     const [filteredRestaurant, setfilteredRestaurant] = useState("");
 
     // Whenever state variables update, react triggers a reconciliation cycle (re-renders the component) 
-    //console.log("Body Rendered");
+    //console.log("Body Rendered", listofRestaurants);
     
 
     useEffect(() => {
@@ -26,9 +26,9 @@ const Body = () => {
         const json = await data.json();
         
     
-        setlistofRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setlistofRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 
-        setfilteredRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setfilteredRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         
         
     };
@@ -48,10 +48,10 @@ const Body = () => {
     return(
         <div className="body">
 
-            <div className="filter">
-                <div className="search">
-                    <input type="text" className="search-text" value={searchText} onChange={(e)=>{setsearchText(e.target.value)}}></input>
-                    <button className="search-btn" onClick={()=>{
+            <div className="filter flex items-center">
+                <div className="search-btn m-4 p-4">
+                    <input type="text" className="border border-solid border-black rounded-sm" value={searchText} onChange={(e)=>{setsearchText(e.target.value)}}></input>
+                    <button className="px-4 py-1 m-2 bg-green-100 rounded-md cursor-pointer" onClick={()=>{
                         const filteredRes = listofRestaurants.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()));
                             setfilteredRestaurant(filteredRes);
                         }}>
@@ -59,15 +59,17 @@ const Body = () => {
                     </button>
                 </div>
                 
-                <button className="filter-btn" onClick={() => {
-                    const filteredList = listofRestaurants.filter((res) =>res.info.avgRating >= 4 ); 
-                    setfilteredRestaurant(filteredList);
-                    }}>
-                    Top rated Restaurants
-                </button>
+                <div className="m-4 p-4">
+                    <button className="px-4 py-1 bg-gray-100 rounded-md cursor-pointer" onClick={() => {
+                        const filteredList = listofRestaurants.filter((res) =>res.info.avgRating >= 4.5 ); 
+                        setfilteredRestaurant(filteredList);
+                        }}>
+                        Top Rated Restaurants
+                    </button>
+                </div>
             </div>
 
-            <div className="res-container">
+            <div className="res-container flex flex-wrap justify-center">
 
                 {/* Whenever we loop over an array, we have to give unique key to every child */}
 
@@ -79,3 +81,4 @@ const Body = () => {
 }
 
 export default Body;
+
