@@ -3,6 +3,7 @@ import { LOGO_URL } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { Link } from "react-router";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
 
@@ -12,6 +13,11 @@ const Header = () => {
 
     const {loggedInUser} = useContext(UserContext);
     //console.log(loggedInUser);
+
+    // Subscribing to the store using Selector
+    const cartItems = useSelector((store) => store.cart.items);
+    console.log(cartItems);
+    
     
 
     return(
@@ -26,8 +32,8 @@ const Header = () => {
                     <li className="p-4"><Link to = "/about">About</Link></li>
                     <li className="p-4"><Link to = "/contact">Contact Us</Link></li>
                     <li className="p-4"><Link to = "/grocery">Grocery</Link></li>
-                    <li className="p-4">Cart</li>
-                    <button className="login-btn cursor-pointer" onClick = {() => {btnName == "Login" ? setbtnName("Logout") : setbtnName("Login");}}>{btnName}</button>
+                    <li className="p-4 font-bold"><Link to="/cart">Cart ({cartItems.length})</Link></li>
+                    <button className="login-btn cursor-pointer p-4" onClick = {() => {btnName == "Login" ? setbtnName("Logout") : setbtnName("Login");}}>{btnName}</button>
                     {/* <li className="p-4 font-bold"> {loggedInUser} </li> */}
                 </ul>
             </div>

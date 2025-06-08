@@ -32,3 +32,14 @@
         
         - export const Component
         - import {Component} from "path"
+
+
+# Redux Toolkit
+
+    - Install @reducjs/toolkit and react-redux
+    - Build our store
+    - Connect our store to our App
+    - Slice (cartSlice)
+    - dispatch (action)
+    - function (reducer)
+    - Selector
